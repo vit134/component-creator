@@ -22,7 +22,7 @@ console.log(
   ),
 );
 
-const result = {};
+let result = {};
 
 const distQ = async () => {
   const { dist } = await inquirer.distination();
@@ -43,12 +43,9 @@ const componentNameQ = async (dist) => {
   const { componentName } = await inquirer.componentName();
   const path = `${dist}/${componentName}`;
   if (files.isExistFolder(path)) {
-    // компонент уже существует
     const create = await inquirer.folderExist(componentName, true);
 
-    // перезаписать?
     if (!create[`exist_${componentName}`]) {
-      // нет
       return await componentNameQ(dist); // eslint-disable-line no-return-await
     }
   }
@@ -64,13 +61,25 @@ const componentTypeQ = async () => {
   return quest.componentType;
 };
 
+const componentMockQ = async () => {
+  const quest = await inquirer.mock();
+  result = { ...result, ...quest };
+
+  return { ...quest };
+};
+
 const run = async () => {
   const dist = await distQ();
   const name = await componentNameQ(dist);
   const type = await componentTypeQ();
+  const extraQ = {
+    ...await componentMockQ(),
+  };
+
   const componentParams = { dist, name, type };
   const path = `${dist}/${name}`;
-  Listr.run(path, componentParams);
+
+  Listr.run(path, componentParams, extraQ);
 };
 
 run();

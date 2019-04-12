@@ -1,12 +1,12 @@
 import React from 'react';
-import { <%= name %> } from './index';
+import { <%= componentName %> } from './index';
 
 export default {
-    component: <%= name %>,
+    component: <%= componentName %>,
     group: 'Site',
     preview() {
         return (
-            <<%= name %> />
+            <<%= componentName %> />
         );
     },
     storyboard() {
@@ -15,7 +15,7 @@ export default {
                 title: '',
                 states: [
                     {
-                        render: () => <<%= name %> />
+                        render: () => <<%= componentName %> />
                     }
                 ]
             }
