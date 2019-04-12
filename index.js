@@ -11,9 +11,9 @@ const files = require('./lib/files');
 
 clear();
 
-console.log(
-  chalk.red('path.dirname(process.cwd())', path.dirname(process.cwd()))
-);
+// console.log(
+//   chalk.red('path.dirname(process.cwd())', path.dirname(process.cwd()))
+// );
 
 // show hello message
 console.log(
