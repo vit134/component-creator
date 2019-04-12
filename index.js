@@ -3,6 +3,7 @@ const chalk = require('chalk');
 const clear = require('clear');
 const figlet = require('figlet');
 const path = require('path');
+const fs = require('fs');
     
 const inquirer  = require('./lib/inquirer');
 const Listr = require('./lib/listr');
@@ -11,7 +12,7 @@ const files = require('./lib/files');
 clear();
 
 console.log(
-  chalk.red(path.dirname(require.main.filename))
+  chalk.red(path.dirname(fs.realpathSync(__filename)))
 );
 
 // show hello message
