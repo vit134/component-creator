@@ -24,6 +24,7 @@
     "figlet": "^1.2.1",
     "inquirer": "^6.2.2",
     "listr": "^0.14.3",
+    "lodash": "^4.17.11",
     "minimist": "^1.2.0",
     "template": "^0.17.5"
   },

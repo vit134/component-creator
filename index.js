@@ -2,18 +2,22 @@
 const chalk = require('chalk');
 const clear = require('clear');
 const figlet = require('figlet');
+const argv = require('minimist')(process.argv.slice(2));
+const _ = require('lodash');
+const config = require('./config.json');
 
 const inquirer = require('./lib/inquirer');
 const Listr = require('./lib/listr');
 const files = require('./lib/files');
 
+if (argv.d && typeof argv.d !== 'string') {
+  // eslint-disable-next-line no-console
+  console.log(chalk.red('If you want to use default params, you must enter component name'));
+  process.exit();
+}
+
 clear();
 
-// console.log(
-//   chalk.red('path.dirname(process.cwd())', path.dirname(process.cwd()))
-// );
-
-// show hello message
 // eslint-disable-next-line no-console
 console.log(
   chalk.yellow(
@@ -68,18 +72,33 @@ const componentMockQ = async () => {
   return { ...quest };
 };
 
-const run = async () => {
-  const dist = await distQ();
-  const name = await componentNameQ(dist);
-  const type = await componentTypeQ();
-  const extraQ = {
-    ...await componentMockQ(),
-  };
+const init = async () => {
+  let dist;
+  let name;
+  let type;
+  let extraQ;
 
-  const componentParams = { dist, name, type };
+  if (!argv.d) {
+    dist = await distQ();
+    name = await componentNameQ(dist);
+    type = await componentTypeQ();
+    extraQ = {
+      ...await componentMockQ(),
+    };
+  } else {
+    dist = _.get(config, 'default.dist');
+    name = argv.d;
+    type = _.get(config, 'default.type');
+
+    extraQ = {
+      ..._.get(config, 'default'),
+    };
+  }
+
   const path = `${dist}/${name}`;
+  const componentParams = { dist, name, type };
 
   Listr.run(path, componentParams, extraQ);
 };
 
-run();
+init();
