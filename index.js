@@ -12,7 +12,7 @@ const files = require('./lib/files');
 clear();
 
 console.log(
-  chalk.red(path.dirname(fs.realpathSync(__filename)))
+  chalk.red(path.dirname(process.cwd()))
 );
 
 // show hello message
