@@ -2,6 +2,7 @@
 const chalk = require('chalk');
 const clear = require('clear');
 const figlet = require('figlet');
+const path = require('path');
     
 const inquirer  = require('./lib/inquirer');
 const Listr = require('./lib/listr');
