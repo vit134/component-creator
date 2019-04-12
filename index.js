@@ -9,6 +9,7 @@ const config = require('./config.json');
 const inquirer = require('./lib/inquirer');
 const Listr = require('./lib/listr');
 const files = require('./lib/files');
+const init = require('./lib/parse-params');
 
 if (argv.d && typeof argv.d !== 'string') {
   // eslint-disable-next-line no-console
@@ -72,13 +73,15 @@ const componentMockQ = async () => {
   return { ...quest };
 };
 
-const init = async () => {
+const run = async () => {
+  const initialValues = await init();
+
   let dist;
   let name;
   let type;
   let extraQ;
 
-  if (!argv.d) {
+  if (!initialValues.useDefault) {
     dist = await distQ();
     name = await componentNameQ(dist);
     type = await componentTypeQ();
@@ -87,7 +90,7 @@ const init = async () => {
     };
   } else {
     dist = _.get(config, 'default.dist');
-    name = argv.d;
+    name = initialValues.useDefault;
     type = _.get(config, 'default.type');
 
     extraQ = {
@@ -101,4 +104,4 @@ const init = async () => {
   Listr.run(path, componentParams, extraQ);
 };
 
-init();
+run();
