@@ -1,0 +1,25 @@
+import React from 'react';
+import { <%= name %> } from './index';
+
+export default {
+    component: <%= name %>,
+    group: 'Site',
+    preview() {
+        return (
+            <<%= name %> />
+        );
+    },
+    storyboard() {
+        return [
+            {
+                title: '',
+                states: [
+                    {
+                        render: () => <<%= name %> />
+                    }
+                ]
+            }
+        ];
+    }
+};
+

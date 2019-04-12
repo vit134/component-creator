@@ -1,0 +1,28 @@
+{
+  "name": "component-creator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "ginit": "./index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "clear": "^0.1.0",
+    "clui": "^0.3.6",
+    "commander": "^2.20.0",
+    "configstore": "^4.0.0",
+    "engine-lodash": "^0.8.2",
+    "figlet": "^1.2.1",
+    "inquirer": "^6.2.2",
+    "listr": "^0.14.3",
+    "minimist": "^1.2.0",
+    "template": "^0.17.5"
+  }
+}
