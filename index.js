@@ -9,9 +9,9 @@ const files = require('./lib/files');
 
 clear();
 
-// console.log(
-//   chalk.red(path.dirname(require.main.filename))
-// )
+console.log(
+  chalk.red(path.dirname(require.main.filename))
+);
 
 // show hello message
 console.log(
