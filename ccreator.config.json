@@ -3,7 +3,9 @@
     "dist": "src/components",
     "type": "class",
     "mock": true,
-    "mockFolder": "__mock__"
+    "mockFolder": "__mock__",
+    "mockFileExtension": "json",
+    "additional": true
   },
   "additional": [
     {

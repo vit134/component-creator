@@ -2,20 +2,14 @@
 const chalk = require('chalk');
 const clear = require('clear');
 const figlet = require('figlet');
-const argv = require('minimist')(process.argv.slice(2));
 const _ = require('lodash');
-const config = require('./config.json');
+const config = require('./ccreator.config.json');
 
 const inquirer = require('./lib/inquirer');
 const Listr = require('./lib/listr');
 const files = require('./lib/files');
-const init = require('./lib/parse-params');
-
-if (argv.d && typeof argv.d !== 'string') {
-  // eslint-disable-next-line no-console
-  console.log(chalk.red('If you want to use default params, you must enter component name'));
-  process.exit();
-}
+const utils = require('./utils');
+const init = require('./lib/initialise');
 
 clear();
 
@@ -50,7 +44,9 @@ const componentNameQ = async (dist) => {
   if (files.isExistFolder(path)) {
     const create = await inquirer.folderExist(componentName, true);
 
-    if (!create[`exist_${componentName}`]) {
+    if (create[`exist_${componentName}`]) {
+      result.overWritingFiles = await files.getFilesInFolder(path);
+    } else {
       return await componentNameQ(dist); // eslint-disable-line no-return-await
     }
   }
@@ -98,8 +94,10 @@ const run = async () => {
     };
   }
 
+  extraQ.overWritingFiles = result.overWritingFiles;
+
   const path = `${dist}/${name}`;
-  const componentParams = { dist, name, type };
+  const componentParams = { dist, name: utils.getComponentName(name), type };
 
   Listr.run(path, componentParams, extraQ);
 };
