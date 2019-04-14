@@ -10,12 +10,10 @@
   "additional": [
     {
       "extention": "phakt.js",
-      "content": true,
       "tmpl": "phakt_js"
     },
     {
       "extention": "spec.js",
-      "content": true,
       "tmpl": "spec_js"
     }
   ]

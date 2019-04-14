@@ -2,16 +2,18 @@
 const chalk = require('chalk');
 const clear = require('clear');
 const figlet = require('figlet');
-const _ = require('lodash');
-const config = require('./ccreator.config.json');
 
 const inquirer = require('./lib/inquirer');
 const Listr = require('./lib/listr');
 const files = require('./lib/files');
 const utils = require('./utils');
 const init = require('./lib/initialise');
+const config = require('./lib/config');
+
 
 clear();
+
+console.log(config.all);
 
 // eslint-disable-next-line no-console
 console.log(
@@ -85,12 +87,12 @@ const run = async () => {
       ...await componentMockQ(),
     };
   } else {
-    dist = _.get(config, 'default.dist');
+    dist = config.get('default.dist');
     name = initialValues.useDefault;
-    type = _.get(config, 'default.type');
+    type = config.get('default.type');
 
     extraQ = {
-      ..._.get(config, 'default'),
+      ...config.get('default'),
     };
   }
 
