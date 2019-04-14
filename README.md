@@ -1,6 +1,22 @@
 ## CCreator
 
+CLI app for simple and fast create component folder with files
 
-## ccreator.config.json
+### Get started
+#### Install
 
-`tmplPath`: path to template folder
+`npm i -g ccreator` or `npm i ccreator` if you need install package local
+
+#### Configure
+App can be configured using `ccreator.config.json` in the root of your project.
+
+Config file contains the following fields: 
+
+|  Name | Type  | Default  | Description  |
+| ------------ | ------------ | ------------ | ------------ |
+| tmplPath  | string  |   | path to template files  |
+|  indexFileName | string  | "index"  |  "index" or "component". index.js or [compoenentName].js |
+|  stylesFileName | string  | "component"  | "styles" or "component". styles.css or [component-name].css  |
+|  mockFolder | string  | "\__mock\__"  | name of folder for mocking data  |
+|  mockFileName |  string | "mock"  | name of mocking data file  |
+|  mockFileExtension | string  | "json" | extension of mocking data file  |

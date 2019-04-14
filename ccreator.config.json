@@ -3,10 +3,13 @@
     "dist": "src/components",
     "type": "class",
     "mock": true,
-    "mockFolder": "__mock__",
-    "mockFileExtension": "json",
     "additional": true
   },
+  "indexFileName": "index",
+  "stylesFileName": "component",
+  "mockFolder": "__mock__",
+  "mockFileName": "mock",
+  "mockFileExtension": "json",
   "additional": [
     {
       "extention": "phakt.js",
