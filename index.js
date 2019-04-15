@@ -13,8 +13,6 @@ const config = require('./lib/config');
 
 clear();
 
-console.log(config.all);
-
 // eslint-disable-next-line no-console
 console.log(
   chalk.yellow(
@@ -94,9 +92,11 @@ const run = async () => {
     extraQ = {
       ...config.get('default'),
     };
-  }
 
-  extraQ.overWritingFiles = result.overWritingFiles;
+    if (files.isExistFolder(`${dist}/${name}`)) {
+      extraQ.overWritingFiles = await files.getFilesInFolder(`${dist}/${name}`);
+    }
+  }
 
   const path = `${dist}/${name}`;
   const componentParams = { dist, name: utils.getComponentName(name), type };
