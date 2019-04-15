@@ -2,8 +2,7 @@
   "default": {
     "dist": "src/components",
     "type": "class",
-    "mock": false,
-    "additional": true
+    "mock": false
   },
   "indexFileName": "index",
   "stylesFileName": "component",
