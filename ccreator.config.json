@@ -1,0 +1,22 @@
+{
+  "default": {
+    "dist": "src/components",
+    "type": "class",
+    "mock": false
+  },
+  "indexFileName": "index",
+  "stylesFileName": "component",
+  "mockFolder": "__mock__",
+  "mockFileName": "mock",
+  "mockFileExtension": "json",
+  "additional": [
+    {
+      "extention": "phakt.js",
+      "tmpl": "phakt_js"
+    },
+    {
+      "extention": "spec.js",
+      "tmpl": "spec_js"
+    }
+  ]
+}

@@ -6,14 +6,13 @@ const figlet = require('figlet');
 const inquirer = require('./lib/inquirer');
 const Listr = require('./lib/listr');
 const files = require('./lib/files');
+const utils = require('./utils');
+const init = require('./lib/initialise');
+const config = require('./lib/config');
+
 
 clear();
 
-// console.log(
-//   chalk.red('path.dirname(process.cwd())', path.dirname(process.cwd()))
-// );
-
-// show hello message
 // eslint-disable-next-line no-console
 console.log(
   chalk.yellow(
@@ -45,7 +44,9 @@ const componentNameQ = async (dist) => {
   if (files.isExistFolder(path)) {
     const create = await inquirer.folderExist(componentName, true);
 
-    if (!create[`exist_${componentName}`]) {
+    if (create[`exist_${componentName}`]) {
+      result.overWritingFiles = await files.getFilesInFolder(path);
+    } else {
       return await componentNameQ(dist); // eslint-disable-line no-return-await
     }
   }
@@ -69,15 +70,36 @@ const componentMockQ = async () => {
 };
 
 const run = async () => {
-  const dist = await distQ();
-  const name = await componentNameQ(dist);
-  const type = await componentTypeQ();
-  const extraQ = {
-    ...await componentMockQ(),
-  };
+  const initialValues = await init();
 
-  const componentParams = { dist, name, type };
+  let dist;
+  let name;
+  let type;
+  let extraQ;
+
+  if (!initialValues.useDefault) {
+    dist = await distQ();
+    name = await componentNameQ(dist);
+    type = await componentTypeQ();
+    extraQ = {
+      ...await componentMockQ(),
+    };
+  } else {
+    dist = config.get('default.dist');
+    name = initialValues.useDefault;
+    type = config.get('default.type');
+
+    extraQ = {
+      ...config.get('default'),
+    };
+
+    if (files.isExistFolder(`${dist}/${name}`)) {
+      extraQ.overWritingFiles = await files.getFilesInFolder(`${dist}/${name}`);
+    }
+  }
+
   const path = `${dist}/${name}`;
+  const componentParams = { dist, name: utils.getComponentName(name), type };
 
   Listr.run(path, componentParams, extraQ);
 };
