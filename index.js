@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+require('dotenv').config();
 const chalk = require('chalk');
 const clear = require('clear');
 const figlet = require('figlet');
@@ -70,6 +71,7 @@ const componentMockQ = async () => {
 };
 
 const run = async () => {
+  console.log(process.env.MODE);
   const initialValues = await init();
 
   let dist;

@@ -24,6 +24,7 @@
     "clui": "^0.3.6",
     "commander": "^2.20.0",
     "configstore": "^4.0.0",
+    "dotenv": "^7.0.0",
     "engine-lodash": "^0.8.2",
     "figlet": "^1.2.1",
     "inquirer": "^6.2.2",
