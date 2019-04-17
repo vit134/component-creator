@@ -87,7 +87,7 @@ const run = async () => {
   } else {
     dist = config.get('default.dist');
     name = initialValues.useDefault;
-    type = config.get('default.type');
+    type = config.get('default.componentType');
 
     extraQ = {
       ...config.get('default'),

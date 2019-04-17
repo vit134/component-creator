@@ -1,7 +1,7 @@
 {
   "default": {
     "dist": "src/components",
-    "type": "class",
+    "componentType": "function",
     "mock": false
   },
   "indexFileName": "index",
