@@ -101,7 +101,7 @@ const run = async () => {
   }
 
   const path = `${dist}/${name}`;
-  const componentParams = { dist, name: utils.getComponentName(name), type };
+  const componentParams = { dist, name, type };
 
   Listr.run(path, componentParams, extraQ);
 };
