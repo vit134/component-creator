@@ -7,7 +7,6 @@ const figlet = require('figlet');
 const inquirer = require('./lib/inquirer');
 const Listr = require('./lib/listr');
 const files = require('./lib/files');
-const utils = require('./utils');
 const init = require('./lib/initialise');
 const config = require('./lib/config');
 
@@ -71,7 +70,6 @@ const componentMockQ = async () => {
 };
 
 const run = async () => {
-  console.log(process.env.MODE);
   const initialValues = await init();
 
   let dist;
