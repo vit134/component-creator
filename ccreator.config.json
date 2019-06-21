@@ -5,10 +5,10 @@
     "mock": false
   },
   "indexFileName": "index",
-  "stylesFileName": "component",
+  "stylesFileName": "styles",
   "mockFolder": "__mock__",
-  "mockFileName": "mock",
-  "mockFileExtension": "json",
+  "mockFileName": "mock-data",
+  "mockFileExtension": "js",
   "additional": [
     {
       "extention": "phakt.js",
