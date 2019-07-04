@@ -55,6 +55,13 @@ const cssFileName = {
   message: 'Choose css file naming type',
 };
 
+const rewriteConfig = {
+  name: 'rewriteConfig',
+  type: 'confirm',
+  default: 0,
+  message: 'Config file already exist, do you want to rewrite it?',
+};
+
 
 module.exports = {
   destinationPath: () => inquirer.prompt(destination),
@@ -63,6 +70,7 @@ module.exports = {
   fileNamingType: () => inquirer.prompt(fileNamingType),
   jsFileName: () => inquirer.prompt(jsFileName),
   cssFileName: () => inquirer.prompt(cssFileName),
+  rewriteConfig: () => inquirer.prompt(rewriteConfig),
   initialise: async () => inquirer.prompt([
     destination,
     templatePath,

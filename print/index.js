@@ -2,7 +2,7 @@
 const chalk = require('chalk');
 const figlet = require('figlet');
 
-const printHellowMessage = () => {
+const printLogo = () => {
   console.log(
     chalk.yellow(
       figlet.textSync(`Component
@@ -24,7 +24,7 @@ const printConfigError = async (error) => {
 };
 
 module.exports = {
-  printHellowMessage,
+  printLogo,
   printConfigSuccess,
   printConfigError,
 };

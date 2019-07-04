@@ -1,23 +1,8 @@
 {
-  "default": {
-    "dist": "src/components",
-    "componentType": "function",
-    "tmplPath": "tmlp",
-    "mock": false
-  },
-  "indexFileName": "index",
-  "stylesFileName": "styles",
-  "mockFolder": "__mock__",
-  "mockFileName": "mock-data",
-  "mockFileExtension": "js",
-  "additional": [
-    {
-      "extention": "phakt.js",
-      "tmpl": "phakt_js"
-    },
-    {
-      "extention": "spec.js",
-      "tmpl": "spec_js"
-    }
-  ]
+  "dist": "src/components",
+  "tmplPath": "tmlp",
+  "componentType": "function",
+  "fileNamingType": "dash-case",
+  "jsFileName": "index",
+  "cssFileName": "styles"
 }

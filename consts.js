@@ -1,5 +1,5 @@
 module.exports = {
-  configFileName: 'ccreator1.config.json',
+  configFileName: 'ccreator.config.json',
   componentTypes: ['function', 'class'],
   fileNamingTypes: ['dash-case', 'camelcase'],
 };
