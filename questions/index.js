@@ -57,14 +57,14 @@ const cssFileName = {
 const rewriteConfig = {
   name: 'rewriteConfig',
   type: 'confirm',
-  default: 0,
+  default: false,
   message: 'Config file already exist, do you want to rewrite it?',
 };
 
 const addConfigToGitIgnore = {
   name: 'addConfigToGitIgnore',
   type: 'confirm',
-  default: 1,
+  default: false,
   message: 'Add configuration file to .gitignore?',
 };
 
