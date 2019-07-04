@@ -1,8 +1,10 @@
 {
-  "dist": "src/components",
-  "tmplPath": "tmlp",
-  "componentType": "function",
-  "fileNamingType": "dash-case",
-  "jsFileName": "index",
-  "cssFileName": "styles"
+  "default": {
+    "dist": "src/components",
+    "tmplPath": "tmpl",
+    "componentType": "function",
+    "fileNamingType": "dash-case",
+    "jsFileName": "index",
+    "cssFileName": "styles"
+  }
 }

@@ -19,11 +19,12 @@ Component Creator - утилита для быстрого создания па
   * нужна ли папка с `mock` (да/нет) (`mockFolder`)
   * название папки для `mock` (`mockFolderName`)
   * название `mock` файла (`mockFileName`)
-  * дополнительные файлы (`additional`)
+  * дополнительные файлы или папки (`additional`)
     ```js
     {
-      "extention": "phakt.js",
-      "tmpl": "phakt_js"
+      "name": "phakt.js",
+      "tmpl": "phakt_js",
+      "isFolder": false
     }
     ```
 - [ ] В утилите есть `help` (`ccreator --help`)

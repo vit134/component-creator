@@ -62,6 +62,19 @@ const rewriteConfig = {
   message: 'Config file already exist, do you want to rewrite it?',
 };
 
+const addConfigToGitIgnore = {
+  name: 'addConfigToGitIgnore',
+  type: 'confirm',
+  default: 1,
+  message: 'Add configuration file to .gitignore?',
+};
+
+const componentFolderExist = componentName => ({
+  name: 'componentFolderExist',
+  type: 'confirm',
+  default: 1,
+  message: `Component ${componentName} already exist, do you want to overwrite it?`,
+});
 
 module.exports = {
   destinationPath: () => inquirer.prompt(destination),
@@ -71,6 +84,8 @@ module.exports = {
   jsFileName: () => inquirer.prompt(jsFileName),
   cssFileName: () => inquirer.prompt(cssFileName),
   rewriteConfig: () => inquirer.prompt(rewriteConfig),
+  addConfigToGitIgnore: () => inquirer.prompt(addConfigToGitIgnore),
+  componentFolderExist: componentName => inquirer.prompt(componentFolderExist(componentName)),
   initialise: async () => inquirer.prompt([
     destination,
     templatePath,
