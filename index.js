@@ -1,3 +1,6 @@
+#!/usr/bin/env node
+require('dotenv').config();
+
 const argv = require('minimist')(process.argv.slice(2));
 const Config = require('./lib/config');
 const { initialise, rewriteConfig: rewriteConfigQuestion } = require('./questions');
