@@ -19,8 +19,7 @@ const destination = {
 const templatePath = {
   name: 'tmplPath',
   type: 'input',
-  default: config.get('default.tmplPath'),
-  message: 'Enter path to template files',
+  message: 'Enter path to template files (leave it dusty to use the default folder)',
 };
 
 const componentType = {
