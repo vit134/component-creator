@@ -1,9 +1,13 @@
 #!/usr/bin/env node
 require('dotenv').config();
 
-const argv = require('minimist')(process.argv.slice(2));
 const clear = require('clear');
 const Listr = require('listr');
+const args = require('minimist');
+const { configFileName, componentTypes, argsOpts } = require('./consts');
+
+const argv = args(process.argv.slice(2), argsOpts);
+
 
 const {
   initialise,
@@ -11,7 +15,7 @@ const {
   addConfigToGitIgnore: addConfigToGitIgnoreQuestion,
   componentFolderExist: componentFolderExistQuestion,
 } = require('./questions');
-const { configFileName } = require('./consts');
+
 const { createFile, isExistFolder, addContentToFile } = require('./lib/files');
 const {
   printConfigSuccess,
@@ -36,35 +40,6 @@ printLogo();
 
 const run = async () => {
   const [componentName] = argv._;
-  if (componentName) {
-    const isComponentFolderExist = isExistFolder(`${Config.get('dist')}/${componentName}`);
-    const additional = Config.get('additional', []);
-
-    if (isComponentFolderExist) {
-      const { componentFolderExist } = await componentFolderExistQuestion(componentName);
-
-      if (componentFolderExist) {
-        await new Listr([rewriteFolderTask(componentName)]).run();
-      } else {
-        printOk();
-        printSomeMessage('Try again with anouther name', 'green');
-        process.exit();
-      }
-    } else {
-      await new Listr([createComponentFolderTask(componentName)]).run();
-    }
-
-    const tasks = [
-      createJsFileTask(componentName),
-      createCssFileTask(componentName),
-    ];
-
-    if (additional.length) {
-      tasks.push(createAdditionalTask({ additional, componentName }));
-    }
-
-    new Listr(tasks).run();
-  }
 
   if (argv.init) {
     // Проверяем есть ли конфигурационный файл
@@ -105,6 +80,46 @@ const run = async () => {
       printConfigError(e);
       process.exit();
     }
+  }
+
+  if (componentName) {
+    if (argv.ct) {
+      if (componentTypes.includes(argv.ct)) {
+        Config.set('componentType', argv.ct);
+      } else {
+        printSomeMessage('Option --ct must be "function" or "class"');
+        process.exit();
+      }
+    }
+
+    const isComponentFolderExist = isExistFolder(`${Config.get('dist')}/${componentName}`);
+    const additional = Config.get('additional', []);
+
+    if (isComponentFolderExist) {
+      const { componentFolderExist } = await componentFolderExistQuestion(componentName);
+
+      if (componentFolderExist) {
+        await new Listr([rewriteFolderTask(componentName)]).run();
+      } else {
+        printOk();
+        printSomeMessage('Try again with anouther name', 'green');
+        process.exit();
+      }
+    } else {
+      console.log(componentName)
+      await new Listr([createComponentFolderTask(componentName)]).run();
+    }
+
+    const tasks = [
+      createJsFileTask(componentName),
+      createCssFileTask(componentName),
+    ];
+
+    if (additional.length) {
+      tasks.push(createAdditionalTask({ additional, componentName }));
+    }
+
+    new Listr(tasks).run();
   }
 };
 

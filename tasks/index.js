@@ -9,12 +9,11 @@ const {
 
 const { createJsFile, createCssFile, createAdditionalFile } = require('../lib/listr/helpers');
 
-const PATH = Config.get('dist');
-const componentType = Config.get('componentType');
+const PATH = () => Config.get('dist');
 
 const createComponentFolderTask = folderName => ({
-  title: 'Creating component folder',
-  task: () => createFolder(`${PATH}/${folderName}`),
+  title: `Creating component folder ${chalk.green(`${PATH()}/${folderName}`)}`,
+  task: () => createFolder(`${PATH()}/${folderName}`),
 });
 
 /**
@@ -22,15 +21,18 @@ const createComponentFolderTask = folderName => ({
  * @param {String} componentName - название js файла
  * @returns {object} таска на создание js файла
  */
-const createJsFileTask = componentName => ({
-  title: `Creating ${chalk.green(getJsFileName(componentName))}`,
-  task: () => createJsFile({
-    path: `${PATH}/${componentName}`,
-    fileName: getJsFileName(componentName),
-    componentName,
-    tmpl: componentType === 'class' ? 'index_class_js.tmpl' : 'index_function_js.tmpl',
-  }),
-});
+const createJsFileTask = (componentName) => {
+  const componentType = Config.get('componentType');
+  return {
+    title: `Creating ${chalk.green(getJsFileName(componentName))}`,
+    task: () => createJsFile({
+      path: `${PATH()}/${componentName}`,
+      fileName: getJsFileName(componentName),
+      componentName,
+      tmpl: componentType === 'class' ? 'index_class_js.tmpl' : 'index_function_js.tmpl',
+    }),
+  };
+};
 
 /**
  * Возвращает объект с таской на создание css файла
@@ -40,7 +42,7 @@ const createJsFileTask = componentName => ({
 const createCssFileTask = componentName => ({
   title: `Creating ${chalk.green(getCssFileName(componentName))}`,
   task: () => createCssFile({
-    path: `${PATH}/${componentName}`,
+    path: `${PATH()}/${componentName}`,
     fileName: getCssFileName(componentName),
   }),
 });
@@ -52,15 +54,15 @@ const createCssFileTask = componentName => ({
  * @returns {object} таска перезапись папки с компонентом
  */
 const rewriteFolderTask = componentName => ({
-  title: `Creating folder ${chalk.green(componentName)}`,
+  title: `Creating folder ${PATH()}/${chalk.green(componentName)}`,
   task: () => new Listr([
     {
       title: 'Removing old component folder',
-      task: () => removeFile(`${PATH}/${componentName}`),
+      task: () => removeFile(`${PATH()}/${componentName}`),
     },
     {
       title: 'Create new component folder',
-      task: () => createFolder(`${PATH}/${componentName}`),
+      task: () => createFolder(`${PATH()}/${componentName}`),
     },
   ], { concurent: true }),
 });
@@ -69,9 +71,9 @@ const createAdditionalTask = ({ additional, componentName }) => {
   const subTasks = additional.map(({ name, tmpl, isFolder }) => ({
     title: `Creating ${isFolder ? 'folder' : 'file'} ${name}`,
     task: isFolder
-      ? () => createFolder(`${PATH}/${componentName}/${name}`)
+      ? () => createFolder(`${PATH()}/${componentName}/${name}`)
       : () => createAdditionalFile({
-        path: `${PATH}/${componentName}`,
+        path: `${PATH()}/${componentName}`,
         fileName: name,
         componentName,
         tmpl,
