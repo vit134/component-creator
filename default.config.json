@@ -1,7 +1,6 @@
 {
   "default": {
     "dist": "src/components",
-    "tmplPath": "tmpl",
     "componentType": "function",
     "fileNamingType": "dash-case",
     "jsFileName": "index",
