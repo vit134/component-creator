@@ -106,7 +106,6 @@ const run = async () => {
         process.exit();
       }
     } else {
-      console.log(componentName)
       await new Listr([createComponentFolderTask(componentName)]).run();
     }
 
