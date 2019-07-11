@@ -2,9 +2,9 @@ const Config = require('../lib/config');
 
 const fileNamingType = Config.get('fileNamingType');
 
-const toDashCase = s => s.replace(/\.?([A-Z]+)/g, (x, y) => `-${y.toLowerCase()}`).replace(/^-/, '');
+const toDashCase = s => String(s).replace(/\.?([A-Z]+)/g, (x, y) => `-${y.toLowerCase()}`).replace(/^-/, '');
 
-const snakeToCamel = s => s.replace(/(\-\w)/g, m => m[1].toUpperCase()); // eslint-disable-line
+const snakeToCamel = s => String(s).replace(/(\-\w)/g, m => m[1].toUpperCase()); // eslint-disable-line
 
 const getComponentName = name => name.charAt(0).toUpperCase() + name.slice(1);
 

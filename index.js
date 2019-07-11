@@ -8,6 +8,7 @@ const { configFileName, componentTypes, argsOpts } = require('./consts');
 
 const argv = args(process.argv.slice(2), argsOpts);
 
+const { copyTemplatesToCustomFolder } = require('./lib/template');
 
 const {
   initialise,
@@ -56,6 +57,11 @@ const run = async () => {
 
     // Задаются вопросы для создания конфигурационного файла
     const initResult = await initialise();
+
+    if (initResult.tmplPath) {
+      await copyTemplatesToCustomFolder(initResult.tmplPath);
+    }
+
     const configJson = JSON.stringify(initResult, null, 2);
 
     // Пытаемся создать конфигурационный файл

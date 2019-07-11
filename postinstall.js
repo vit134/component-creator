@@ -4,9 +4,9 @@ const { printLogo } = require('./print');
 
 printLogo();
 console.log(chalk.green('Thank you for using Component Creator'));
-console.log('\n\n');
+console.log('\n');
 
-console.log(chalk.grey(`run ${chalk.blue('ccreator --init')} into your project directory to create a configuration file`));
-console.log('\n\n');
+console.log(chalk.grey(`run ${chalk.green('ccreator --init')} into your project directory to create a configuration file`));
+console.log('\n');
 
-console.log(chalk.grey(`run ${chalk.blue('ccreator --help')} to see possible options`));
+console.log(chalk.grey(`run ${chalk.green('ccreator --help')} to see possible options`));
