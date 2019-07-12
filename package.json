@@ -1,6 +1,6 @@
 {
   "name": "ccreator",
-  "version": "1.4.4",
+  "version": "1.4.4-beta.1",
   "description": "Node.js CLI for creating react component",
   "main": "index.js",
   "bin": {
