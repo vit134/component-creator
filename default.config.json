@@ -2,7 +2,6 @@
   "default": {
     "dist": "src/components",
     "componentType": "function",
-    "fileNamingType": "dash-case",
     "jsFileName": "index",
     "cssFileName": "styles"
   }

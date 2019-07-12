@@ -16,9 +16,6 @@ Component Creator - утилита для быстрого создания па
   * стиль наименования файлов (`dash-case`/ `camelcase`) (`fileNamingType`)
   * как должен называться `js` файл компонента (`index.js`/`[component-name].js`) (`indexFileName`)
   * как должен называться `css` файл компонента (`styles.css`/`[component-name].css`) (`stylesFileName`)
-  * нужна ли папка с `mock` (да/нет) (`mockFolder`)
-  * название папки для `mock` (`mockFolderName`)
-  * название `mock` файла (`mockFileName`)
   * дополнительные файлы или папки (`additional`)
     ```js
     "additional":[

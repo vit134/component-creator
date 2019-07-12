@@ -98,6 +98,18 @@ const run = async () => {
       }
     }
 
+    if (argv.dist) {
+      Config.set('dist', argv.dist);
+    }
+
+    if (argv.jsName) {
+      Config.set('jsFileName', argv.jsName);
+    }
+
+    if (argv.cssName) {
+      Config.set('cssFileName', argv.cssName);
+    }
+
     const isComponentFolderExist = isExistFolder(`${Config.get('dist')}/${componentName}`);
     const additional = Config.get('additional', []);
 
@@ -120,11 +132,13 @@ const run = async () => {
       createCssFileTask(componentName),
     ];
 
-    if (additional.length) {
+    if (additional.length && !argv['not-add']) {
       tasks.push(createAdditionalTask({ additional, componentName }));
     }
 
-    new Listr(tasks).run();
+    new Listr(tasks).run().catch(({ message }) => {
+      printSomeMessage(message, 'red');
+    });
   }
 };
 

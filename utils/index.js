@@ -1,7 +1,5 @@
 const Config = require('../lib/config');
 
-const fileNamingType = Config.get('fileNamingType');
-
 const toDashCase = s => String(s).replace(/\.?([A-Z]+)/g, (x, y) => `-${y.toLowerCase()}`).replace(/^-/, '');
 
 const snakeToCamel = s => String(s).replace(/(\-\w)/g, m => m[1].toUpperCase()); // eslint-disable-line
@@ -14,14 +12,7 @@ const getJsFileName = (componentName) => {
   const jsFileName = Config.get('jsFileName');
 
   if (jsFileName === 'component') {
-    switch (fileNamingType) {
-      case 'dash-case':
-        return `${componentName}.js`;
-      case 'camelcase':
-        return `${snakeToCamel(componentName)}.js`;
-      default:
-        break;
-    }
+    return `${componentName}.js`;
   }
 
   return 'index.js';
@@ -31,14 +22,7 @@ const getCssFileName = (componentName) => {
   const cssFileName = Config.get('cssFileName');
 
   if (cssFileName === 'component') {
-    switch (fileNamingType) {
-      case 'dash-case':
-        return `${componentName}.css`;
-      case 'camelcase':
-        return `${snakeToCamel(componentName)}.css`;
-      default:
-        break;
-    }
+    return `${componentName}.css`;
   }
 
   return 'styles.css';

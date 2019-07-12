@@ -54,7 +54,7 @@ const createCssFileTask = componentName => ({
  * @returns {object} таска перезапись папки с компонентом
  */
 const rewriteFolderTask = componentName => ({
-  title: `Creating folder ${PATH()}/${chalk.green(componentName)}`,
+  title: `Creating folder ${chalk.green(`${PATH()}/${componentName}`)}`,
   task: () => new Listr([
     {
       title: 'Removing old component folder',
@@ -82,7 +82,7 @@ const createAdditionalTask = ({ additional, componentName }) => {
 
   return {
     title: 'Create additionals',
-    task: () => new Listr(subTasks, { concurent: true }),
+    task: () => new Listr(subTasks, { concurent: true, exitOnError: false }),
   };
 };
 

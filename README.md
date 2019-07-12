@@ -9,11 +9,14 @@ CLI app for simple and fast create component folder with all necessary files
 
 #### Usage
 
-`ccreator`: create component
-
 `ccreator <componentName> <options>` - create component with in `componentName` folder, using default settings
 
-`ccreator <componentName> -f` - force create component with in `componentName` folder, using default settings
+**Options**
+`--ct` - change component type (function or class)
+`--no-add` - no create additional files from `ccreator.config.json`
+`--jsName` - change js file name (component or index)
+`--cssname` - change css file name (component or index)
+
 
 
 #### Configure
@@ -29,3 +32,4 @@ Config file contains the following fields:
 | mockFolder | string  | "\__mock\__"  | name of folder for mocking data  |
 | mockFileName |  string | "mock"  | name of mocking data file  |
 | mockFileExtension | string  | "json" | extension of mocking data file  |
+
