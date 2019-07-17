@@ -5,6 +5,7 @@ const Config = require('../lib/config');
 const {
   getJsFileName,
   getCssFileName,
+  getAdditional,
 } = require('../utils');
 
 const { createJsFile, createCssFile, createAdditionalFile } = require('../lib/listr/helpers');
@@ -68,17 +69,25 @@ const rewriteFolderTask = componentName => ({
 });
 
 const createAdditionalTask = ({ additional, componentName }) => {
-  const subTasks = additional.map(({ name, tmpl, isFolder }) => ({
-    title: `Creating ${isFolder ? 'folder' : 'file'} ${name}`,
-    task: isFolder
-      ? () => createFolder(`${PATH()}/${componentName}/${name}`)
-      : () => createAdditionalFile({
-        path: `${PATH()}/${componentName}`,
-        fileName: name,
-        componentName,
-        tmpl,
-      }),
-  }));
+  const subTasks = getAdditional(additional).map(({
+    name,
+    tmpl,
+    isFolder,
+    path,
+  }) => {
+    const distPath = `${PATH()}/${componentName}`;
+    return {
+      title: `Creating ${isFolder ? 'folder' : 'file'} ${chalk.green(name)}`,
+      task: isFolder
+        ? () => createFolder(`${distPath}/${path}`)
+        : () => createAdditionalFile({
+          distPath,
+          path,
+          componentName,
+          tmpl,
+        }),
+    };
+  });
 
   return {
     title: 'Create additionals',

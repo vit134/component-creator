@@ -28,6 +28,34 @@ const getCssFileName = (componentName) => {
   return 'styles.css';
 };
 
+const getAdditional = (data) => {
+  const q = [...data];
+  const result = [];
+
+  while (q.length > 0) {
+    const elem = q.shift();
+    const isFolder = Boolean(elem.nested && elem.nested.length > 0);
+    const cur = {
+      ...elem,
+      isFolder,
+    };
+
+    cur.path = cur.path ? `${cur.path}/${cur.name}` : cur.name;
+
+    result.push(cur);
+
+    if (cur.nested) {
+      q.unshift(
+        ...cur.nested.map(el => (
+          { ...el, path: `${cur.path}` }
+        )),
+      );
+    }
+  }
+
+  return result;
+};
+
 module.exports = {
   toDashCase,
   snakeToCamel,
@@ -35,4 +63,5 @@ module.exports = {
   compose,
   getJsFileName,
   getCssFileName,
+  getAdditional,
 };
